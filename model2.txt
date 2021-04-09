@@ -1,0 +1,15 @@
+model{
+  for(i in 1:N){
+    observed[i] ~ dpois(mu[i])
+    log(mu[i]) <- log(expected[i]) + beta0 + beta1*PM25[i] + beta2*JSA[i] + beta3*Price[i] + phi[i] 
+  }
+  phi[1:N] ~ car.normal(Adj[], weights[], Num[], tau.v)
+  for(k in 1:SumNumNeigh){
+    weights[k] <- 1
+  }
+  beta0~dnorm(0, 0.001)
+  beta1~dnorm(0, 0.001)
+  beta2~dnorm(0, 0.001)
+  beta3~dnorm(0, 0.001)
+  tau.v~dgamma(0.01,0.01)
+}

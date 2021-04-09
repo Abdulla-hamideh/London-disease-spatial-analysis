@@ -1,0 +1,11 @@
+model{
+  for(i in 1:N){
+    Y[i] ~ dpois(mu[i])
+    log(mu[i]) <- log(E[i]) + beta0 + beta1*PM25[i] + beta2*JSA[i] + beta3*Price[i] 
+  }
+  beta0~dnorm(0, 0.001)
+  beta1~dnorm(0, 0.001)
+  beta2~dnorm(0, 0.001)
+  beta3~dnorm(0, 0.001)
+}
+  
